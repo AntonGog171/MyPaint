@@ -39,6 +39,8 @@ public class Buttons {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(pencil.getModel().isSelected()){
+                    turnoff();
+                    pencil.setSelected(true);
                     pencil.setIcon(new ImageIcon("img/pencil_pressed.png"));
                 }
                 else{
@@ -50,6 +52,8 @@ public class Buttons {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(rubber.getModel().isSelected()){
+                    turnoff();
+                    rubber.setSelected(true);
                     rubber.setIcon(new ImageIcon("img/rubber_pressed.png"));
                 }else {
                     rubber.setIcon(new ImageIcon("img/rubber.png"));
@@ -60,6 +64,8 @@ public class Buttons {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(line.getModel().isSelected()){
+                    turnoff();
+                    line.setSelected(true);
                     line.setIcon(new ImageIcon("img/line_pressed.png"));
                 }
                 else{
@@ -71,6 +77,8 @@ public class Buttons {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(square.getModel().isSelected()){
+                    turnoff();
+                    square.setSelected(true);
                     square.setIcon(new ImageIcon("img/square_pressed.png"));
                 }
                 else{
@@ -82,6 +90,8 @@ public class Buttons {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(circle.getModel().isSelected()){
+                    turnoff();
+                    circle.setSelected(true);
                     circle.setIcon(new ImageIcon("img/circle_pressed.png"));
                 }
                 else{
@@ -89,5 +99,18 @@ public class Buttons {
                 }
             }
         });
+    }
+
+    private void turnoff(){
+        pencil.setIcon(new ImageIcon("img/pencil.png"));
+        pencil.setSelected(false);
+        rubber.setIcon(new ImageIcon("img/rubber.png"));
+        rubber.setSelected(false);
+        line.setIcon(new ImageIcon("img/line.png"));
+        line.setSelected(false);
+        square.setIcon(new ImageIcon("img/square.png"));
+        square.setSelected(false);
+        circle.setIcon(new ImageIcon("img/circle.png"));
+        circle.setSelected(false);
     }
 }
