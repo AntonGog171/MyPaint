@@ -11,11 +11,12 @@ public class MainWindow extends JFrame{
 
     public static void main(String[] args) {
         init();
+        initMouseListeners();
     }
 
     private static void init(){
         pannel.add(buttons.pencil);
-        pannel.add(buttons.rubber);
+        pannel.add(buttons.eraser);
         pannel.add(buttons.line);
         pannel.add(buttons.square);
         pannel.add(buttons.circle);
@@ -26,6 +27,7 @@ public class MainWindow extends JFrame{
         canvas.setBackground(new Color(255,255,255));
         pannel.add(canvas);
 
+
         window.setJMenuBar(menu.menuBar);
         window.add(pannel);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -33,4 +35,15 @@ public class MainWindow extends JFrame{
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    private static void initMouseListeners(){
+        PencilMouseListener pencilMouseListener = new PencilMouseListener(canvas, buttons);
+        canvas.addMouseMotionListener(pencilMouseListener);
+        canvas.addMouseListener(pencilMouseListener);
+
+        RubberMouseListener rubberMouseListener = new RubberMouseListener(canvas, buttons);
+        canvas.addMouseListener(rubberMouseListener);
+        canvas.addMouseMotionListener(rubberMouseListener);
+
+
+    }
 }

@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class Buttons {
     public JToggleButton  pencil;
-    public JToggleButton  rubber;
+    public JToggleButton  eraser;
     public JToggleButton  line;
     public JToggleButton  square;
     public JToggleButton  circle;
@@ -20,8 +20,8 @@ public class Buttons {
         pencil=new JToggleButton ( new ImageIcon("img/pencil.png"));
         pencil.setBounds(0, 140, 30, 30);
 
-        rubber= new JToggleButton (new ImageIcon("img/rubber.png"));
-        rubber.setBounds(0, 170, 30, 30);
+        eraser= new JToggleButton (new ImageIcon("img/eraser.png"));
+        eraser.setBounds(0, 170, 30, 30);
 
         line = new JToggleButton ( new ImageIcon("img/line.png"));
         line.setBounds(0, 200, 30, 30);
@@ -48,15 +48,15 @@ public class Buttons {
                 }
             }
         });
-        rubber.addActionListener(new ActionListener() {
+        eraser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(rubber.getModel().isSelected()){
+                if(eraser.getModel().isSelected()){
                     turnoff();
-                    rubber.setSelected(true);
-                    rubber.setIcon(new ImageIcon("img/rubber_pressed.png"));
+                    eraser.setSelected(true);
+                    eraser.setIcon(new ImageIcon("img/eraser_pressed.png"));
                 }else {
-                    rubber.setIcon(new ImageIcon("img/rubber.png"));
+                    eraser.setIcon(new ImageIcon("img/eraser.png"));
                 }
             }
         });
@@ -104,8 +104,8 @@ public class Buttons {
     private void turnoff(){
         pencil.setIcon(new ImageIcon("img/pencil.png"));
         pencil.setSelected(false);
-        rubber.setIcon(new ImageIcon("img/rubber.png"));
-        rubber.setSelected(false);
+        eraser.setIcon(new ImageIcon("img/eraser.png"));
+        eraser.setSelected(false);
         line.setIcon(new ImageIcon("img/line.png"));
         line.setSelected(false);
         square.setIcon(new ImageIcon("img/square.png"));
