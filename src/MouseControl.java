@@ -6,21 +6,24 @@ import java.awt.event.MouseMotionListener;
 
 public class MouseControl implements MouseMotionListener, MouseListener {
 
-    Buttons buttons;
+    InstrumentButtons instrumentButtons;
+    ColorButtons colorButtons;
     int x, y;
     int oldX, oldY;
     int figureStartX, figureStartY;
-    Color color = Color.RED;
+
     DrawPanel panel;
 
-    public MouseControl(Buttons buttons, DrawPanel panel){
-        this.buttons=buttons;
+    public MouseControl(InstrumentButtons instrumentButtons, DrawPanel panel, ColorButtons colorButtons){
+        this.instrumentButtons = instrumentButtons;
         this.panel=panel;
+        this.colorButtons=colorButtons;
     }
 
     @Override
     public void mouseDragged(MouseEvent e){
-        if(buttons.pencil.isSelected()) {
+        Color color=colorButtons.activeColor();
+        if(instrumentButtons.pencil.isSelected()) {
             x = e.getX();
             y = e.getY();
             panel.add(new Instrument(x, y, oldX, oldY, color, -1, -1, "pencil"));
@@ -28,7 +31,7 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             oldY=y;
         }
 
-        if(buttons.eraser.isSelected()) {
+        if(instrumentButtons.eraser.isSelected()) {
             int width=20;
             x = e.getX()-width/2;
             y = e.getY()-width/2;//correcting for cursor
@@ -44,7 +47,8 @@ public class MouseControl implements MouseMotionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(buttons.pencil.isSelected()) {
+        Color color=colorButtons.activeColor();
+        if(instrumentButtons.pencil.isSelected()) {
             int width=10;
             x = e.getX();
             y = e.getY();
@@ -53,7 +57,7 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             oldY=y;
         }
 
-        if(buttons.eraser.isSelected()) {
+        if(instrumentButtons.eraser.isSelected()) {
             int width=10;
             x = e.getX()-width/2;
             y = e.getY()-width/2;//correcting for cursor
@@ -63,7 +67,7 @@ public class MouseControl implements MouseMotionListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(buttons.isOnFigures()){
+        if(instrumentButtons.isOnFigures()){
             figureStartX=e.getX();
             figureStartY=e.getY();
         }
@@ -71,13 +75,14 @@ public class MouseControl implements MouseMotionListener, MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(buttons.line.isSelected()){
+        Color color=colorButtons.activeColor();
+        if(instrumentButtons.line.isSelected()){
             x = e.getX();
             y = e.getY();
             panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "line"));
         }
 
-        if(buttons.rectangle.isSelected()){
+        if(instrumentButtons.rectangle.isSelected()){
             x = e.getX();
             y = e.getY();
 
@@ -94,7 +99,7 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "rectangle"));
         }
 
-        if(buttons.square.isSelected()){
+        if(instrumentButtons.square.isSelected()){
             x = e.getX();
             y = e.getY();
 
@@ -112,7 +117,7 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "square"));
         }
 
-        if(buttons.circle.isSelected()){
+        if(instrumentButtons.circle.isSelected()){
             x = e.getX();
             y = e.getY();
 
@@ -130,7 +135,7 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "circle"));
         }
 
-        if (buttons.oval.isSelected()){
+        if (instrumentButtons.oval.isSelected()){
             x = e.getX();
             y = e.getY();
 

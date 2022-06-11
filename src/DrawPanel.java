@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class DrawPanel extends JPanel{
 
-    Buttons buttons;
+    InstrumentButtons instrumentButtons;
     private int x, y;
     private int oldX, oldY;
     private int figureStartX, figureStartY;
@@ -13,8 +13,8 @@ public class DrawPanel extends JPanel{
 
     private LinkedList<Instrument> instruments = new LinkedList<Instrument>();
 
-    public DrawPanel(Buttons buttons) {
-        this.buttons = buttons;
+    public DrawPanel(InstrumentButtons instrumentButtons) {
+        this.instrumentButtons = instrumentButtons;
     }
 
 

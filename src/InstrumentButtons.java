@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Buttons {
+public class InstrumentButtons {
     public JToggleButton  pencil;
     public JToggleButton  eraser;
     public JToggleButton  line;
@@ -11,7 +11,7 @@ public class Buttons {
     public JToggleButton oval;
     public JToggleButton circle;
 
-    public Buttons(){
+    public InstrumentButtons(){
         initInstrumentButtons();
         initActionListeners();
     }
