@@ -5,27 +5,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 public class Menu {
     public JMenuBar menuBar= new JMenuBar();
     private JMenuItem open;
-    private JMenuItem save;
     private JMenuItem saveAs;
     private JMenuItem print;
     private JMenuItem exit;
-    private DrawPanel canvas;
+    private DrawPanel panel;
 
     public Menu(DrawPanel panel){
-        this.canvas=panel;
+        this.panel =panel;
         JMenu file = new JMenu("File");
         open = new JMenuItem("Open");
-        save = new JMenuItem("Save");
         saveAs = new JMenuItem("Save as");
         print = new JMenuItem("Print");
         exit = new JMenuItem("Exit");
 
         file.add(open);
-        file.add(save);
         file.add(saveAs);
         file.add(print);
         file.add(exit);
@@ -45,26 +43,34 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 final JFileChooser fc = new JFileChooser();
+                BufferedImage myPicture = null;
                 int returnVal = fc.showOpenDialog(null);
                 if (returnVal == JFileChooser.APPROVE_OPTION){
                     File file = fc.getSelectedFile();
+                    try {
+                        myPicture = ImageIO.read(file);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    panel.picuteFromFile=myPicture;
+                    panel.repaint();
                 }
             }
         });
-        save.addActionListener(new ActionListener() {
+        saveAs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 final JFileChooser fc = new JFileChooser();
                 int returnVal = fc.showSaveDialog(null);
                 if (returnVal == JFileChooser.APPROVE_OPTION){
                     File file = fc.getSelectedFile();
-                    BufferedImage image=new BufferedImage(canvas.getWidth(), canvas.getHeight(),BufferedImage.TYPE_INT_RGB);
+                    BufferedImage image=new BufferedImage(panel.getWidth(), panel.getHeight(),BufferedImage.TYPE_INT_RGB);
                     Graphics2D g2=(Graphics2D)image.getGraphics();
-                    canvas.paint(g2);
+                    panel.paint(g2);
                     try {
                         ImageIO.write(image, "png", file);
                     } catch (Exception ex) {
-
+                        ex.printStackTrace();
                     }
                 }
             }
