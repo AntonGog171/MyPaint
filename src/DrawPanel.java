@@ -24,6 +24,10 @@ public class DrawPanel extends JPanel{
         instruments.add(instrument);
         repaint();
     }
+    public void clear(){
+        instruments=new LinkedList<>();
+        picuteFromFile=null;
+    }
 
     public void paintComponent(Graphics g){
         g.setColor(Color.WHITE);
@@ -32,5 +36,7 @@ public class DrawPanel extends JPanel{
         for(Instrument i : instruments){
             i.drawComponent(g);
         }
+
+
     }
 }

@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class Menu {
     public JMenuBar menuBar= new JMenuBar();
+    private JMenuItem clear;
     private JMenuItem open;
     private JMenuItem saveAs;
     private JMenuItem print;
@@ -18,11 +19,13 @@ public class Menu {
     public Menu(DrawPanel panel){
         this.panel =panel;
         JMenu file = new JMenu("File");
+        clear = new JMenuItem("Clear");
         open = new JMenuItem("Open");
         saveAs = new JMenuItem("Save as");
         print = new JMenuItem("Print");
         exit = new JMenuItem("Exit");
 
+        file.add(clear);
         file.add(open);
         file.add(saveAs);
         file.add(print);
@@ -32,10 +35,11 @@ public class Menu {
         initActionListeners();
     }
     private void initActionListeners(){
-        exit.addActionListener(new ActionListener() {
+        clear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(1);
+                panel.clear();
+                panel.repaint();
             }
         });
 
@@ -52,6 +56,7 @@ public class Menu {
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
+                    panel.clear();
                     panel.picuteFromFile=myPicture;
                     panel.repaint();
                 }
@@ -73,6 +78,13 @@ public class Menu {
                         ex.printStackTrace();
                     }
                 }
+            }
+        });
+
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(1);
             }
         });
     }
