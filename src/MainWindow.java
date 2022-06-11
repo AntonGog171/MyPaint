@@ -3,22 +3,30 @@ import java.awt.*;
 
 
 public class MainWindow extends JFrame{
-    private static JFrame window= new JFrame("MyPaint");
-    private static JPanel pannel= new JPanel();
-    private static Buttons buttons = new Buttons();
-    private static Menu menu = new Menu();
-    private static Canvas canvas = new Canvas();
+    private static JFrame window;
+    private static JPanel pannel;
+    private static Buttons buttons;
+    private static Canvas canvas;
+    private static Menu menu;
 
     public static void main(String[] args) {
-        init();
-        initMouseListeners();
+        initWindow();
+        initMouseControl();
     }
 
-    private static void init(){
+    private static void initWindow(){
+        window= new JFrame("MyPaint");
+        pannel= new JPanel();
+        buttons = new Buttons();
+        canvas = new Canvas();
+        menu = new Menu(canvas);
+
         pannel.add(buttons.pencil);
         pannel.add(buttons.eraser);
         pannel.add(buttons.line);
+        pannel.add(buttons.rectangle);
         pannel.add(buttons.square);
+        pannel.add(buttons.oval);
         pannel.add(buttons.circle);
         pannel.setLayout(null);
 
@@ -35,15 +43,14 @@ public class MainWindow extends JFrame{
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private static void initMouseListeners(){
-        PencilMouseListener pencilMouseListener = new PencilMouseListener(canvas, buttons);
-        canvas.addMouseMotionListener(pencilMouseListener);
-        canvas.addMouseListener(pencilMouseListener);
-
-        RubberMouseListener rubberMouseListener = new RubberMouseListener(canvas, buttons);
-        canvas.addMouseListener(rubberMouseListener);
-        canvas.addMouseMotionListener(rubberMouseListener);
-
-
+    private static void initMouseControl(){
+        MouseControl mouseControl = new MouseControl(canvas, buttons);
+        canvas.addMouseMotionListener(mouseControl);
+        canvas.addMouseListener(mouseControl);
     }
+
+    public void paint(Graphics g) {
+        super.paint(g);
+    }
+
 }
