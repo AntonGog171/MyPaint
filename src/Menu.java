@@ -13,10 +13,10 @@ public class Menu {
     private JMenuItem saveAs;
     private JMenuItem print;
     private JMenuItem exit;
-    private Canvas canvas;
+    private DrawPanel canvas;
 
-    public Menu(Canvas canvas){
-        this.canvas=canvas;
+    public Menu(DrawPanel panel){
+        this.canvas=panel;
         JMenu file = new JMenu("File");
         open = new JMenuItem("Open");
         save = new JMenuItem("Save");

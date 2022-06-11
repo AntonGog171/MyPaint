@@ -6,36 +6,33 @@ import java.awt.event.MouseMotionListener;
 
 public class MouseControl implements MouseMotionListener, MouseListener {
 
-    Canvas canvas;
     Buttons buttons;
+    int x, y;
     int oldX, oldY;
     int figureStartX, figureStartY;
+    Color color = Color.RED;
+    DrawPanel panel;
 
-    public MouseControl(Canvas canvas, Buttons buttons){
-        this.canvas=canvas;
+    public MouseControl(Buttons buttons, DrawPanel panel){
         this.buttons=buttons;
+        this.panel=panel;
     }
 
     @Override
     public void mouseDragged(MouseEvent e){
         if(buttons.pencil.isSelected()) {
-            int x = e.getX();
-            int y = e.getY();
-            Graphics g = canvas.getGraphics();
-            g.setColor(new Color(255, 0, 0));
-            g.drawLine(oldX, oldY, x, y);
+            x = e.getX();
+            y = e.getY();
+            panel.add(new Instrument(x, y, oldX, oldY, color, -1, -1, "pencil"));
             oldX=x;
             oldY=y;
         }
 
         if(buttons.eraser.isSelected()) {
-            int width=10;
-            int x = e.getX()-width/2;
-            int y = e.getY()-width/2;//correcting for cursor
-            Graphics g = canvas.getGraphics();
-            g.setColor(canvas.getBackground());
-            g.fillOval(x, y, width, width);
-
+            int width=20;
+            x = e.getX()-width/2;
+            y = e.getY()-width/2;//correcting for cursor
+            panel.add(new Instrument(x, y, oldX, oldY, panel.getBackground(), -1, -1, "eraser"));
         }
     }
 
@@ -49,22 +46,18 @@ public class MouseControl implements MouseMotionListener, MouseListener {
     public void mouseClicked(MouseEvent e) {
         if(buttons.pencil.isSelected()) {
             int width=10;
-            int x = e.getX();
-            int y = e.getY();
-            Graphics g = canvas.getGraphics();
-            g.setColor(new Color(255, 0, 0));
-            g.drawLine(oldX, oldY, x, y);
+            x = e.getX();
+            y = e.getY();
+            panel.add(new Instrument(x, y, oldX, oldY, color, -1, -1, "pencil"));
             oldX=x;
             oldY=y;
         }
 
         if(buttons.eraser.isSelected()) {
             int width=10;
-            int x = e.getX()-width/2;
-            int y = e.getY()-width/2;//correcting for cursor
-            Graphics g = canvas.getGraphics();
-            g.setColor(canvas.getBackground());
-            g.fillOval(x, y, width, width);
+            x = e.getX()-width/2;
+            y = e.getY()-width/2;//correcting for cursor
+            panel.add(new Instrument(x, y, oldX, oldY, panel.getBackground(), figureStartX, figureStartY, "eraser"));
         }
     }
 
@@ -73,27 +66,21 @@ public class MouseControl implements MouseMotionListener, MouseListener {
         if(buttons.isOnFigures()){
             figureStartX=e.getX();
             figureStartY=e.getY();
-            Graphics g = canvas.getGraphics();
-            g.setColor(canvas.getBackground());
-            g.fillOval(figureStartX, figureStartY, 10, 10);
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         if(buttons.line.isSelected()){
-            int x = e.getX();
-            int y = e.getY();
-            Graphics g = canvas.getGraphics();
-            g.setColor(Color.RED);
-            g.drawLine(figureStartX, figureStartY, x, y);
+            x = e.getX();
+            y = e.getY();
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "line"));
         }
 
         if(buttons.rectangle.isSelected()){
-            int x = e.getX();
-            int y = e.getY();
-            Graphics g = canvas.getGraphics();
-            g.setColor(Color.RED);
+            x = e.getX();
+            y = e.getY();
+
             if(figureStartX>x){
                 int temp=x;
                 x=figureStartX;
@@ -104,15 +91,13 @@ public class MouseControl implements MouseMotionListener, MouseListener {
                 y=figureStartY;
                 figureStartY=temp;
             }
-
-            g.drawRect(figureStartX, figureStartY, x-figureStartX, y-figureStartY);
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "rectangle"));
         }
 
         if(buttons.square.isSelected()){
-            int x = e.getX();
-            int y = e.getY();
-            Graphics g = canvas.getGraphics();
-            g.setColor(Color.RED);
+            x = e.getX();
+            y = e.getY();
+
             if(figureStartX>x){
                 int temp=x;
                 x=figureStartX;
@@ -124,14 +109,13 @@ public class MouseControl implements MouseMotionListener, MouseListener {
                 figureStartY=temp;
             }
             int width= Math.max(x-figureStartX, y-figureStartY);
-            g.drawRect(figureStartX, figureStartY, width, width);
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "square"));
         }
 
         if(buttons.circle.isSelected()){
-            int x = e.getX();
-            int y = e.getY();
-            Graphics g = canvas.getGraphics();
-            g.setColor(Color.RED);
+            x = e.getX();
+            y = e.getY();
+
             if(figureStartX>x){
                 int temp=x;
                 x=figureStartX;
@@ -143,14 +127,13 @@ public class MouseControl implements MouseMotionListener, MouseListener {
                 figureStartY=temp;
             }
             int width= Math.max(x-figureStartX, y-figureStartY);
-            g.drawOval(figureStartX, figureStartY, width, width);
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "circle"));
         }
 
         if (buttons.oval.isSelected()){
-            int x = e.getX();
-            int y = e.getY();
-            Graphics g = canvas.getGraphics();
-            g.setColor(Color.RED);
+            x = e.getX();
+            y = e.getY();
+
             if(figureStartX>x){
                 int temp=x;
                 x=figureStartX;
@@ -161,8 +144,7 @@ public class MouseControl implements MouseMotionListener, MouseListener {
                 y=figureStartY;
                 figureStartY=temp;
             }
-
-            g.drawOval(figureStartX, figureStartY, x-figureStartX, y-figureStartY);
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "oval"));
         }
     }
 
@@ -175,4 +157,5 @@ public class MouseControl implements MouseMotionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
 }
