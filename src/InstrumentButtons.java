@@ -3,13 +3,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InstrumentButtons {
-    public JToggleButton  pencil;
-    public JToggleButton  eraser;
-    public JToggleButton  line;
+    public JToggleButton pencil;
+    public JToggleButton brush;
+    public JToggleButton eraser;
+    public JToggleButton line;
     public JToggleButton rectangle;
+    public JToggleButton filledRectangle;
     public JToggleButton square;
+    public JToggleButton filledSquare;
     public JToggleButton oval;
+    public JToggleButton filledOval;
     public JToggleButton circle;
+    public JToggleButton filledCircle;
 
     public InstrumentButtons(){
         initInstrumentButtons();
@@ -20,23 +25,38 @@ public class InstrumentButtons {
         pencil=new JToggleButton ( new ImageIcon("img/pencil.png"));
         pencil.setBounds(0, 140, 30, 30);
 
+        brush= new JToggleButton(new ImageIcon("img/brush.png"));
+        brush.setBounds(30, 140, 30,30);
+
         eraser= new JToggleButton (new ImageIcon("img/eraser.png"));
         eraser.setBounds(0, 170, 30, 30);
 
         line = new JToggleButton ( new ImageIcon("img/line.png"));
-        line.setBounds(0, 200, 30, 30);
+        line.setBounds(30, 170, 30, 30);
 
         rectangle = new JToggleButton (new ImageIcon("img/rectangle.png"));
-        rectangle.setBounds(0,230, 30, 30);
+        rectangle.setBounds(0,200, 30, 30);
+
+        filledRectangle= new JToggleButton(new ImageIcon("img/filled_rectangle.png"));
+        filledRectangle.setBounds(30, 200, 30, 30);
 
         square = new JToggleButton (new ImageIcon("img/square.png"));
-        square.setBounds(0,260, 30, 30);
+        square.setBounds(0,230, 30, 30);
+
+        filledSquare = new JToggleButton(new ImageIcon("img/filled_square.png"));
+        filledSquare.setBounds(30, 230, 30,30);
 
         oval = new JToggleButton ( new ImageIcon("img/oval.png"));
-        oval.setBounds(0,290, 30, 30);
+        oval.setBounds(0,260, 30, 30);
+
+        filledOval= new JToggleButton(new ImageIcon("img/filled_oval.png"));
+        filledOval.setBounds(30, 260, 30, 30);
 
         circle = new JToggleButton (new ImageIcon("img/circle.png"));
-        circle.setBounds(0,320, 30, 30);
+        circle.setBounds(0,290, 30, 30);
+
+        filledCircle = new JToggleButton(new ImageIcon("img/filled_circle.png"));
+        filledCircle.setBounds(30,290, 30, 30);
 
     }
 
@@ -51,6 +71,18 @@ public class InstrumentButtons {
                 }
                 else{
                     pencil.setIcon(new ImageIcon("img/pencil.png"));
+                }
+            }
+        });
+        brush.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(brush.isSelected()){
+                    turnoff();
+                    brush.setSelected(true);
+                    brush.setIcon(new ImageIcon("img/brush_pressed.png"));
+                }else{
+                    brush.setIcon(new ImageIcon("img/brush.png"));
                 }
             }
         });
@@ -92,6 +124,18 @@ public class InstrumentButtons {
                 }
             }
         });
+        filledRectangle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(filledRectangle.isSelected()){
+                    turnoff();
+                    filledRectangle.setSelected(true);
+                    filledRectangle.setIcon(new ImageIcon("img/filled_rectangle_pressed.png"));
+                }else{
+                    filledRectangle.setIcon(new ImageIcon("img/filled_rectangle.png"));
+                }
+            }
+        });
         square.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,6 +146,18 @@ public class InstrumentButtons {
                 }
                 else{
                     square.setIcon(new ImageIcon("img/square.png"));
+                }
+            }
+        });
+        filledSquare.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(filledSquare.isSelected()){
+                    turnoff();
+                    filledSquare.setSelected(true);
+                    filledSquare.setIcon(new ImageIcon("img/filled_square_pressed.png"));
+                }else{
+                    filledSquare.setIcon(new ImageIcon("img/filled_square.png"));
                 }
             }
         });
@@ -118,6 +174,18 @@ public class InstrumentButtons {
                 }
             }
         });
+        filledOval.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(filledOval.isSelected()){
+                    turnoff();
+                    filledOval.setSelected(true);
+                    filledOval.setIcon(new ImageIcon("img/filled_oval_pressed.png"));
+                }else{
+                    filledOval.setIcon(new ImageIcon("img/filled_oval"));
+                }
+            }
+        });
         circle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,26 +199,48 @@ public class InstrumentButtons {
                 }
             }
         });
+        filledCircle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(filledCircle.isSelected()){
+                    turnoff();
+                    filledCircle.setSelected(true);
+                    filledCircle.setIcon(new ImageIcon("img/filled_circle_pressed.png"));
+                }else{
+                    filledCircle.setIcon(new ImageIcon("img/filled_circle.png"));
+                }
+            }
+        });
     }
 
     private void turnoff(){
         pencil.setIcon(new ImageIcon("img/pencil.png"));
         pencil.setSelected(false);
+        brush.setIcon(new ImageIcon("img/brush.png"));
+        brush.setSelected(false);
         eraser.setIcon(new ImageIcon("img/eraser.png"));
         eraser.setSelected(false);
         line.setIcon(new ImageIcon("img/line.png"));
         line.setSelected(false);
         rectangle.setIcon(new ImageIcon("img/rectangle.png"));
         rectangle.setSelected(false);
+        filledRectangle.setIcon(new ImageIcon("img/filled_rectangle.png"));
+        filledRectangle.setSelected(false);
         square.setIcon(new ImageIcon(("img/square.png")));
         square.setSelected(false);
+        filledSquare.setIcon(new ImageIcon("img/filled_square.png"));
+        filledSquare.setSelected(false);
         oval.setIcon(new ImageIcon("img/oval.png"));
         oval.setSelected(false);
+        filledOval.setIcon(new ImageIcon("img/filled_oval.png"));
+        filledOval.setSelected(false);
         circle.setIcon(new ImageIcon("img/circle.png"));
         circle.setSelected(false);
+        filledCircle.setIcon(new ImageIcon("img/filled_circle.png"));
+        filledCircle.setSelected(false);
     }
 
     public boolean isOnFigures(){
-        return line.isSelected() || rectangle.isSelected() || square.isSelected() || oval.isSelected() || circle.isSelected();
+        return line.isSelected() || rectangle.isSelected() || filledRectangle.isSelected() || square.isSelected() || filledSquare.isSelected() || oval.isSelected()|| filledOval.isSelected() || circle.isSelected() || filledCircle.isSelected();
     }
 }

@@ -26,7 +26,7 @@ public class MouseControl implements MouseMotionListener, MouseListener {
         if(instrumentButtons.pencil.isSelected()) {
             x = e.getX();
             y = e.getY();
-            panel.add(new Instrument(x, y, oldX, oldY, color, -1, -1, "pencil"));
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "pencil"));
             oldX=x;
             oldY=y;
         }
@@ -35,7 +35,14 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             int width=20;
             x = e.getX()-width/2;
             y = e.getY()-width/2;//correcting for cursor
-            panel.add(new Instrument(x, y, oldX, oldY, panel.getBackground(), -1, -1, "eraser"));
+            panel.add(new Instrument(x, y, oldX, oldY, panel.getBackground(), figureStartX, figureStartY, "eraser"));
+        }
+
+        if(instrumentButtons.brush.isSelected()) {
+            int width=10;
+            x = e.getX()-width/2;
+            y = e.getY()-width/2;//correcting for cursor
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "brush"));
         }
     }
 
@@ -52,7 +59,7 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             int width=10;
             x = e.getX();
             y = e.getY();
-            panel.add(new Instrument(x, y, oldX, oldY, color, -1, -1, "pencil"));
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "pencil"));
             oldX=x;
             oldY=y;
         }
@@ -62,6 +69,13 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             x = e.getX()-width/2;
             y = e.getY()-width/2;//correcting for cursor
             panel.add(new Instrument(x, y, oldX, oldY, panel.getBackground(), figureStartX, figureStartY, "eraser"));
+        }
+
+        if(instrumentButtons.brush.isSelected()) {
+            int width=10;
+            x = e.getX()-width/2;
+            y = e.getY()-width/2;//correcting for cursor
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "brush"));
         }
     }
 
@@ -99,6 +113,23 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "rectangle"));
         }
 
+        if(instrumentButtons.filledRectangle.isSelected()){
+            x = e.getX();
+            y = e.getY();
+
+            if(figureStartX>x){
+                int temp=x;
+                x=figureStartX;
+                figureStartX=temp;
+            }
+            if(figureStartY>y){
+                int temp=y;
+                y=figureStartY;
+                figureStartY=temp;
+            }
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "filledRectangle"));
+        }
+
         if(instrumentButtons.square.isSelected()){
             x = e.getX();
             y = e.getY();
@@ -115,6 +146,23 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             }
             int width= Math.max(x-figureStartX, y-figureStartY);
             panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "square"));
+        }
+
+        if(instrumentButtons.filledSquare.isSelected()){
+            x = e.getX();
+            y = e.getY();
+
+            if(figureStartX>x){
+                int temp=x;
+                x=figureStartX;
+                figureStartX=temp;
+            }
+            if(figureStartY>y){
+                int temp=y;
+                y=figureStartY;
+                figureStartY=temp;
+            }
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "filledSquare"));
         }
 
         if(instrumentButtons.circle.isSelected()){
@@ -135,6 +183,23 @@ public class MouseControl implements MouseMotionListener, MouseListener {
             panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "circle"));
         }
 
+        if(instrumentButtons.filledCircle.isSelected()){
+            x = e.getX();
+            y = e.getY();
+
+            if(figureStartX>x){
+                int temp=x;
+                x=figureStartX;
+                figureStartX=temp;
+            }
+            if(figureStartY>y){
+                int temp=y;
+                y=figureStartY;
+                figureStartY=temp;
+            }
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "filledCircle"));
+        }
+
         if (instrumentButtons.oval.isSelected()){
             x = e.getX();
             y = e.getY();
@@ -150,6 +215,23 @@ public class MouseControl implements MouseMotionListener, MouseListener {
                 figureStartY=temp;
             }
             panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "oval"));
+        }
+
+        if(instrumentButtons.filledOval.isSelected()){
+            x = e.getX();
+            y = e.getY();
+
+            if(figureStartX>x){
+                int temp=x;
+                x=figureStartX;
+                figureStartX=temp;
+            }
+            if(figureStartY>y){
+                int temp=y;
+                y=figureStartY;
+                figureStartY=temp;
+            }
+            panel.add(new Instrument(x, y, oldX, oldY, color, figureStartX, figureStartY, "filledOval"));
         }
     }
 

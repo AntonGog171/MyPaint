@@ -107,7 +107,7 @@ public class ColorButtons {
             @Override
             public void actionPerformed(ActionEvent e) {
                 turnoff();
-                gray.setSelected(true);
+                white.setSelected(true);
                 colorShow.setBackground(activeColor());
             }
         });
